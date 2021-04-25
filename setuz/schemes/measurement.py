@@ -8,6 +8,7 @@ class MeasurementSchema:
     id: int
     name: str
     short_name: str
+    tm: int
 
 
 @dataclass

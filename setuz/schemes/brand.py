@@ -7,6 +7,7 @@ from typing import List
 class BrandSchema:
     id: int
     name: str
+    tm: int
 
 
 @dataclass

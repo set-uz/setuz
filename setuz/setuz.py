@@ -25,7 +25,8 @@ class SetUz:
             measurements.append(MeasurementSchema(
                 id=result['id'],
                 name=result['name'],
-                short_name=result['short_name']
+                short_name=result['short_name'],
+                tm=result['tm']
             ))
 
         instance: MeasurementListSchema = MeasurementListSchema(
@@ -49,7 +50,8 @@ class SetUz:
         for result in data['results']:
             brands.append(BrandSchema(
                 id=result['id'],
-                name=result['name']
+                name=result['name'],
+                tm=result['tm']
             ))
 
         instance: BrandListSchema = BrandListSchema(
@@ -75,8 +77,3 @@ class SetUz:
 
     def get_default_query_parm(self, page: int = 0, page_size: int = 25, last_id: int = 0, last_tm: int = 0) -> str:
         return f'?page={page}&page_size={page_size}&last_id={last_id}&last_tm={last_tm}'
-
-
-setuz = SetUz('dppjstbn04cg7z55ulvoey2x6gm0zz45')
-x = setuz.get_measurement()
-print(x)
