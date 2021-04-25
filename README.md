@@ -23,13 +23,13 @@ setuz = SetUz('token')
 
 # get brand
 brand = setuz.get_brand(page=1, page_size=25, last_tm=0)
-brand_result = "BrandListSchema(count=6, next=None, prev=None, results=[BrandSchema(id=122, name='CocaCola')])"
+brand_result = "BrandListSchema(count=6, next=None, prev=None, results=[BrandSchema(id=122, name='CocaCola', tm=1)])"
 print(brand.results[0].name)  # CocaCola
 print(brand.count)  # 6
 
 # get measurement
 measurement = setuz.get_measurement()
-measurement_result = "MeasurementListSchema(count=4, next=None, prev=None, results=[MeasurementSchema(id=4, name='Штука', short_name='шт')])"
+measurement_result = "MeasurementListSchema(count=4, next=None, prev=None, results=[MeasurementSchema(id=4, name='Штука', short_name='шт', tm=1)])"
 print(measurement.results[0].name)  # Штука
 print(measurement.count)  # 4
 
