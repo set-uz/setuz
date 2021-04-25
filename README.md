@@ -35,7 +35,6 @@ print(measurement.count)  # 4
 
 # get category
 setuz.get_category()
-# result 
 category_result = [{
     'id': 3,
     'name': 'Notebook',
