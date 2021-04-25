@@ -1,7 +1,7 @@
 import requests
-from exceptions.auth_error import AuthenticationError, NotFoundError
-from schemes.measurement import MeasurementListSchema, MeasurementSchema
-from schemes.brand import BrandListSchema, BrandSchema
+from .exceptions.auth_error import AuthenticationError, NotFoundError
+from .schemes.measurement import MeasurementListSchema, MeasurementSchema
+from .schemes.brand import BrandListSchema, BrandSchema
 
 
 class SetUz:
