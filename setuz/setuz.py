@@ -1,6 +1,5 @@
 import requests
 from exceptions.auth_error import AuthenticationError, NotFoundError
-
 from schemes.measurement import MeasurementListSchema, MeasurementSchema
 from schemes.brand import BrandListSchema, BrandSchema
 
@@ -61,13 +60,12 @@ class SetUz:
         )
         return instance
 
-
     def get_category(self):
         url = f'{self.main_api}/category/'
         response = requests.get(url, headers=self.headers)
         self.check_status_code(response.status_code)
         data = response.json()
-        print(data)
+        return data
 
     def check_status_code(self, status_code: int):
         if status_code == 401:
@@ -80,5 +78,5 @@ class SetUz:
 
 
 setuz = SetUz('dppjstbn04cg7z55ulvoey2x6gm0zz45')
-setuz.get_category()
-
+x = setuz.get_measurement()
+print(x)
