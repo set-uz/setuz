@@ -7,3 +7,8 @@
 <img alt="Docs" src="https://github.com/awtkns/fastapi-crudrouter/workflows/docs/badge.svg" />
   <img alt="License" src="https://img.shields.io/github/license/awtkns/fastapi-crudrouter?color=%2334D058" />
 </p>
+
+
+```shell
+pip install setuz
+```
