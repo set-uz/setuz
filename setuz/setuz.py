@@ -1,7 +1,8 @@
 import requests
 from .exceptions.auth_error import AuthenticationError, NotFoundError
-from .schemes.measurement import MeasurementListSchema, MeasurementSchema
-from .schemes.brand import BrandListSchema, BrandSchema
+from .parsers.measurement import measurement_parser, MeasurementListSchema
+from .parsers.brand import brand_parser, BrandListSchema
+from .parsers.order import order_parser, OrderListSchema
 
 
 class SetUz:
@@ -11,6 +12,14 @@ class SetUz:
         self.headers: dict = dict(Authorization=self.token)
         self.main_api: str = f'http://devapi.set.uz/api/v{self.version}/integration'
 
+    def get_order(
+            self, page: int = 1, page_size: int = 25, last_id: int = 0, last_tm: int = 0
+    ) -> OrderListSchema:
+        url = f'{self.main_api}/order/{self.get_default_query_parm(page, page_size, last_id, last_tm)}'
+        response = requests.get(url, headers=self.headers)
+        self.check_status_code(response.status_code)
+        return order_parser(response)
+
     def get_measurement(
             self, page: int = 1, page_size: int = 25, last_id: int = 0, last_tm: int = 0
     ) -> MeasurementListSchema:
@@ -18,24 +27,7 @@ class SetUz:
         url = f'{self.main_api}/measurement/{self.get_default_query_parm(page, page_size, last_id, last_tm)}'
         response = requests.get(url, headers=self.headers)
         self.check_status_code(response.status_code)
-        data = response.json()
-        measurements: list = []
-
-        for result in data['results']:
-            measurements.append(MeasurementSchema(
-                id=result['id'],
-                name=result['name'],
-                short_name=result['short_name'],
-                tm=result['tm']
-            ))
-
-        instance: MeasurementListSchema = MeasurementListSchema(
-            count=data['count'],
-            next=data['next'],
-            prev=data['prev'],
-            results=measurements
-        )
-        return instance
+        return measurement_parser(response)
 
     def get_brand(
             self, page: int = 1, page_size: int = 25, last_id: int = 0, last_tm: int = 0
@@ -44,23 +36,7 @@ class SetUz:
         url = f'{self.main_api}/brand/{self.get_default_query_parm(page, page_size, last_id, last_tm)}'
         response = requests.get(url, headers=self.headers)
         self.check_status_code(response.status_code)
-        data = response.json()
-        brands: list = []
-
-        for result in data['results']:
-            brands.append(BrandSchema(
-                id=result['id'],
-                name=result['name'],
-                tm=result['tm']
-            ))
-
-        instance: BrandListSchema = BrandListSchema(
-            count=data['count'],
-            next=data['next'],
-            prev=data['prev'],
-            results=brands
-        )
-        return instance
+        return brand_parser(response)
 
     def get_category(self):
         url = f'{self.main_api}/category/'

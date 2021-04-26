@@ -34,6 +34,12 @@ measurement_result = "MeasurementListSchema(count=4, next=None, prev=None, resul
 print(measurement.results[0].name)  # Штука
 print(measurement.count)  # 4
 
+# get order
+order = setuz.get_order()
+order_result = "OrderListSchema(count=1, next=None, prev=None, results=[OrderSchema(id=1, total_price=700000.0, status='pending', order_products=[OrderProductSchema(id=1, total_price=600000.0, quantity=12, product=Product(provider_product_id=1, name='Test product'))], created_date=datetime.datetime(2021, 4, 26, 4, 28, 55, 656147))])"
+print(order.count)  # 1
+print(order.results[0].id)  # 1
+
 # get category
 setuz.get_category()
 category_result = [{
