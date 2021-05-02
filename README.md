@@ -82,6 +82,7 @@ if result is True:
 else:
     print('error', result)
 
+# delete product
 result = setuz.delete_product(1)  # delete product  id = provider product id 
 if result is True:
     print('success delete')
