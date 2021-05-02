@@ -26,7 +26,8 @@ def order_parser(response) -> OrderListSchema:
             total_price=result['total_price'],
             status=result['status'],
             created_date=datetime.strptime(result['created_date'], '%Y-%m-%dT%H:%M:%S.%f'),
-            order_products=order_products
+            order_products=order_products,
+            tm=result['tm']
         ))
 
     return OrderListSchema(

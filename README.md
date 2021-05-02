@@ -47,8 +47,45 @@ category_result = [{
     'name': 'Notebook',
     'photo': {
         'id': 173,
-        'path': 'http://devapi.set.uz/media/2021/4/11/47a7d863-f95d-4ba9-9ad0-c13ac7507685.jpg',
-        'children': []
+        'children': [
+            {
+                "id": 4,
+                "name": "Acer Nitro 5",
+                "children": []
+            }
+        ]
     }}]
 print(category_result[0]['name'])  # Notebook
+
+# create product
+from setuz.schemes.product import ProductCreateSchema, ProductImagesSchema
+
+file_id = setuz.upload_file('<file_path>')
+images = ProductImagesSchema(photo_id=file_id, is_main=True)
+
+product = ProductCreateSchema(
+    provider_product_id=1,  # product_id
+    category_id=3,  # category set id
+    brand_id=122,  # brand set id
+    measurement_id=4,  # measurement set id
+    name='Iphone XL 10',
+    description='Iphone GG  WP',
+    price=12.5,
+    barcode='123331244',
+    cashback=0,
+    product_images=[images]
+)
+
+result = setuz.create_product(product)
+if result is True:
+    print('success create')
+else:
+    print('error', result)
+
+result = setuz.delete_product(1)  # delete product  id = provider product id 
+if result is True:
+    print('success delete')
+else:
+    print('error', result)
+
 ```

@@ -21,6 +21,7 @@ class OrderProductSchema:
 @dataclass
 class OrderSchema:
     id: int
+    tm: int
     total_price: float
     status: str
     order_products: List[OrderProductSchema]

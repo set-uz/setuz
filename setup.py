@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="setuz",
-    version="1.0.2",
+    version="1.0.3",
     author="Sadullayev Bekhzod",
     author_email="begymrx@gmail.com",
     description="SetUz",
